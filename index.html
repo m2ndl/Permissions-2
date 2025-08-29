@@ -715,7 +715,12 @@
             let current = new Date(today);
             current.setDate(current.getDate() + 1); // Start from tomorrow
             
-            while (current <= endDate) {
+            // Reset time components to ensure accurate date comparison
+            current.setHours(0, 0, 0, 0);
+            let end = new Date(endDate);
+            end.setHours(23, 59, 59, 999); // Include the entire last day
+            
+            while (current <= end) {
                 const dayOfWeek = current.getDay();
                 if (dayOfWeek !== 5 && dayOfWeek !== 6) { // Not Friday or Saturday
                     workdays++;
