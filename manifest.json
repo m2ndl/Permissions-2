@@ -1,0 +1,21 @@
+{
+  "name": "Permission Tracker",
+  "short_name": "Permissions",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ECEFF1",
+  "theme_color": "#00838F",
+  "description": "An offline app to track monthly work permissions based on the Hijri calendar.",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
