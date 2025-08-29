@@ -1,74 +1,966 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Phoenix editor</title>
-        <link rel="stylesheet" href="styles.css" />
-        <script src="script.js"></script>
-    </head>
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#00796b">
+    <title>Permissions Tracker - متتبع الأذونات</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Permissions">
+    <link rel="apple-touch-icon" href="data:image/png;base64,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">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <body onload="onPageLoaded()">
-        <img id="starsLeft" alt="stars" src="images/stars-left.svg" />
-        <div id="mainDiv">
-            <img id="logo" alt="logo" src="images/phoenix-logo.svg" />
-            <div id="MainText">
-                <h1>Phoenix Code</h1>
-                <span>Click here to locate this &lt;span&gt; in the HTML file<br /></span><br />
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+            min-height: 100vh;
+            color: #263238;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0;
+            min-height: 100vh;
+            background: white;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #00796b 0%, #00695c 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #004d40;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+            background: transparent;
+            border: none;
+            position: relative;
+        }
+
+        .nav-tab.active {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #4db6ac;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .page {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.3s;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .date-info {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .date-info h2 {
+            font-size: 20px;
+            color: #00695c;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .date-info .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .date-info .detail-item {
+            text-align: center;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .date-info .detail-item .label {
+            font-size: 12px;
+            color: #757575;
+            margin-bottom: 2px;
+        }
+
+        .date-info .detail-item .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00796b;
+        }
+
+        .counter-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .counter-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #00796b;
+            margin: 10px 0;
+        }
+
+        .counter-label {
+            font-size: 14px;
+            color: #757575;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            background: #e0f2f1;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4db6ac 0%, #00796b 100%);
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,121,107,0.3);
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            font-weight: 600;
+            color: #263238;
+        }
+
+        .remaining-info {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .remaining-count {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .remaining-label {
+            font-size: 14px;
+            color: #558b2f;
+            margin-top: 5px;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-late {
+            background: linear-gradient(135deg, #ff7043 0%, #ff5722 100%);
+            color: white;
+        }
+
+        .btn-late:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255,87,34,0.4);
+        }
+
+        .btn-early {
+            background: linear-gradient(135deg, #29b6f6 0%, #0288d1 100%);
+            color: white;
+        }
+
+        .btn-early:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(2,136,209,0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .history-list {
+            margin-top: 10px;
+        }
+
+        .history-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .history-item:hover {
+            transform: translateX(5px);
+        }
+
+        .history-date {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00695c;
+        }
+
+        .history-type {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .type-late {
+            background: linear-gradient(135deg, #ff7043 0%, #ff5722 100%);
+        }
+
+        .type-early {
+            background: linear-gradient(135deg, #29b6f6 0%, #0288d1 100%);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #9e9e9e;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            max-width: 320px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.3s;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal h3 {
+            margin-bottom: 15px;
+            color: #263238;
+        }
+
+        .modal p {
+            margin-bottom: 20px;
+            color: #607d8b;
+            font-size: 14px;
+        }
+
+        .modal-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .modal-cancel {
+            background: #eceff1;
+            color: #607d8b;
+        }
+
+        .modal-confirm {
+            background: linear-gradient(135deg, #00796b 0%, #00695c 100%);
+            color: white;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .settings-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .settings-section h3 {
+            margin-bottom: 15px;
+            color: #00695c;
+            font-size: 18px;
+        }
+
+        .install-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00796b 0%, #00695c 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0,121,107,0.3);
+        }
+
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,121,107,0.5);
+        }
+
+        .install-btn:disabled {
+            background: #cfd8dc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .install-status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .status-installed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-browser {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>متتبع الأذونات</h1>
+            <div class="subtitle">Permissions Tracker</div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showPage('home')">Home</button>
+            <button class="nav-tab" onclick="showPage('history')">History</button>
+            <button class="nav-tab" onclick="showPage('settings')">Settings</button>
+        </div>
+
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="date-info">
+                <h2 id="hijriMonth">Loading...</h2>
+                <div class="details">
+                    <div class="detail-item">
+                        <div class="label">Starts</div>
+                        <div class="value" id="monthStart">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Ends</div>
+                        <div class="value" id="monthEnd">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Workdays</div>
+                        <div class="value" id="workdays">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Today</div>
+                        <div class="value" id="todayHijri">-</div>
+                    </div>
+                </div>
             </div>
-            <div class="video-container">
-                <a
-                    href="https://www.youtube.com/watch?feature=player_embedded&v=Jkg3nAZ6vF8"
-                    target="_blank"
-                    title="Phoenix YouTube Channel">
-                    <img
-                        src="images/youtube_video.png"
-                        alt="Phoenix Code on YouTube"
-                        title="Phoenix Code on YouTube"
-                        style="max-width: 320px" />
-                </a>
-                <svg class="play-button" viewBox="0 0 200 200" alt="Play video">
-                    <circle cx="100" cy="100" r="90" fill="#333" fill-opacity="0.6" />
-                    <polygon points="70, 55 70, 145 145, 100" fill="white" />
-                </svg>
+
+            <div class="counter-card">
+                <div class="counter-label">Permissions Used</div>
+                <div class="counter-display" id="counterDisplay">0/10</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    <div class="progress-text" id="progressText">0%</div>
+                </div>
+            </div>
+
+            <div class="remaining-info">
+                <div class="remaining-count" id="remainingCount">10</div>
+                <div class="remaining-label">Permissions Remaining</div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-late" onclick="usePermission('late')">
+                    Late Arrival
+                </button>
+                <button class="btn btn-early" onclick="usePermission('early')">
+                    Early Departure
+                </button>
             </div>
         </div>
-        <img id="cloudLeftTop" alt="cloud" src="images/vector-top-left.png" />
-        <img id="cloudBottomRight" alt="cloud" src="images/vector-bottom-right.png" />
-        <img id="starsRight" alt="stars" src="images/stars-right.svg" />
-        <img
-            class="clouds"
-            alt="cloud"
-            style="z-index: 3; transform: translate(0px, -1.55909px)"
-            src="images/cloud1.svg" />
-        <img
-            class="clouds"
-            alt="cloud"
-            style="z-index: 6; transform: translate(0px, -2.33863px)"
-            src="images/cloud2.svg" />
-        <img
-            class="clouds"
-            alt="cloud"
-            style="z-index: 5; transform: translate(0px, -3.89772px)"
-            src="images/cloud3.svg" />
-        <img
-            class="clouds"
-            alt="cloud"
-            style="z-index: 6; transform: translate(0px, -3.89772px)"
-            src="images/cloud4.svg" />
-        <div class="night">
-            <div class="shooting_star">
-                <div class="shooting_star" />
+
+        <!-- History Page -->
+        <div id="history" class="page">
+            <div class="history-list" id="historyList">
+                <div class="empty-state">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <p>No permissions used this month</p>
+                </div>
             </div>
         </div>
-        <div class="night">
-            <div class="shooting_star">
-                <div class="shooting_star" />
+
+        <!-- Settings Page -->
+        <div id="settings" class="page">
+            <div class="settings-section">
+                <h3>App Installation</h3>
+                <button class="install-btn" id="installBtn" onclick="installApp()">
+                    Install App
+                </button>
+                <div class="install-status" id="installStatus">
+                    <span>Running in browser</span>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>About</h3>
+                <p style="font-size: 14px; color: #607d8b; line-height: 1.6;">
+                    Track your monthly work permissions for late arrivals and early departures according to the Um AlQura Hijri calendar. 
+                    All data is stored locally on your device.
+                </p>
             </div>
         </div>
-        <div class="night">
-            <div class="shooting_star">
-                <div class="shooting_star" />
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Confirm Permission</h3>
+            <p id="modalMessage">Are you sure you want to use a permission?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-cancel" onclick="closeModal()">Cancel</button>
+                <button class="modal-btn modal-confirm" id="confirmBtn">Confirm</button>
             </div>
         </div>
-    </body>
+    </div>
+
+    <script>
+        // Um AlQura Calendar Data (simplified - covers 1445-1447 H)
+        const umAlQuraData = {
+            1445: {
+                1: {start: new Date(2023, 6, 19), days: 29}, // Muharram
+                2: {start: new Date(2023, 7, 17), days: 30}, // Safar
+                3: {start: new Date(2023, 8, 16), days: 29}, // Rabi I
+                4: {start: new Date(2023, 9, 15), days: 30}, // Rabi II
+                5: {start: new Date(2023, 10, 14), days: 29}, // Jumada I
+                6: {start: new Date(2023, 11, 13), days: 30}, // Jumada II
+                7: {start: new Date(2024, 0, 12), days: 29}, // Rajab
+                8: {start: new Date(2024, 1, 10), days: 30}, // Sha'ban
+                9: {start: new Date(2024, 2, 11), days: 29}, // Ramadan
+                10: {start: new Date(2024, 3, 9), days: 30}, // Shawwal
+                11: {start: new Date(2024, 4, 9), days: 29}, // Dhul Qa'dah
+                12: {start: new Date(2024, 5, 7), days: 30}  // Dhul Hijjah
+            },
+            1446: {
+                1: {start: new Date(2024, 6, 7), days: 30},  // Muharram
+                2: {start: new Date(2024, 7, 6), days: 29},  // Safar
+                3: {start: new Date(2024, 8, 4), days: 30},  // Rabi I
+                4: {start: new Date(2024, 9, 4), days: 29},  // Rabi II
+                5: {start: new Date(2024, 10, 2), days: 30}, // Jumada I
+                6: {start: new Date(2024, 11, 2), days: 29}, // Jumada II
+                7: {start: new Date(2024, 11, 31), days: 30}, // Rajab
+                8: {start: new Date(2025, 0, 30), days: 29}, // Sha'ban
+                9: {start: new Date(2025, 1, 28), days: 30}, // Ramadan
+                10: {start: new Date(2025, 2, 30), days: 29}, // Shawwal
+                11: {start: new Date(2025, 3, 28), days: 30}, // Dhul Qa'dah
+                12: {start: new Date(2025, 4, 28), days: 29}  // Dhul Hijjah
+            },
+            1447: {
+                1: {start: new Date(2025, 5, 26), days: 30},  // Muharram
+                2: {start: new Date(2025, 6, 26), days: 29},  // Safar
+                3: {start: new Date(2025, 7, 24), days: 30},  // Rabi I
+                4: {start: new Date(2025, 8, 23), days: 29},  // Rabi II
+                5: {start: new Date(2025, 9, 22), days: 30},  // Jumada I
+                6: {start: new Date(2025, 10, 21), days: 29}, // Jumada II
+                7: {start: new Date(2025, 11, 20), days: 30}, // Rajab
+                8: {start: new Date(2026, 0, 19), days: 29}, // Sha'ban
+                9: {start: new Date(2026, 1, 17), days: 30}, // Ramadan
+                10: {start: new Date(2026, 2, 19), days: 29}, // Shawwal
+                11: {start: new Date(2026, 3, 17), days: 30}, // Dhul Qa'dah
+                12: {start: new Date(2026, 4, 17), days: 30}  // Dhul Hijjah
+            }
+        };
+
+        const hijriMonthNames = [
+            "Muharram", "Safar", "Rabi' al-Awwal", "Rabi' al-Thani",
+            "Jumada al-Awwal", "Jumada al-Thani", "Rajab", "Sha'ban",
+            "Ramadan", "Shawwal", "Dhul Qa'dah", "Dhul Hijjah"
+        ];
+
+        let currentPermissionType = null;
+        let deferredPrompt = null;
+
+        // Get current Hijri date
+        function getCurrentHijriDate() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            for (let year = 1445; year <= 1447; year++) {
+                for (let month = 1; month <= 12; month++) {
+                    const monthData = umAlQuraData[year][month];
+                    const monthStart = new Date(monthData.start);
+                    const monthEnd = new Date(monthStart);
+                    monthEnd.setDate(monthEnd.getDate() + monthData.days - 1);
+                    
+                    if (today >= monthStart && today <= monthEnd) {
+                        const dayOfMonth = Math.floor((today - monthStart) / (1000 * 60 * 60 * 24)) + 1;
+                        return {
+                            year: year,
+                            month: month,
+                            day: dayOfMonth,
+                            monthName: hijriMonthNames[month - 1],
+                            monthStart: monthStart,
+                            monthEnd: monthEnd,
+                            monthDays: monthData.days
+                        };
+                    }
+                }
+            }
+            
+            // Fallback to approximate calculation if date not in table
+            return {
+                year: 1447,
+                month: 1,
+                day: 1,
+                monthName: hijriMonthNames[0],
+                monthStart: new Date(),
+                monthEnd: new Date(),
+                monthDays: 30
+            };
+        }
+
+        // Calculate workdays in month (excluding Friday and Saturday)
+        function calculateWorkdays(startDate, endDate) {
+            let workdays = 0;
+            let current = new Date(startDate);
+            
+            while (current <= endDate) {
+                const dayOfWeek = current.getDay();
+                if (dayOfWeek !== 5 && dayOfWeek !== 6) { // Not Friday or Saturday
+                    workdays++;
+                }
+                current.setDate(current.getDate() + 1);
+            }
+            
+            return workdays;
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const data = localStorage.getItem('permissionsData');
+            if (data) {
+                return JSON.parse(data);
+            }
+            return {
+                permissions: [],
+                lastResetMonth: null,
+                lastResetYear: null
+            };
+        }
+
+        // Save data to localStorage
+        function saveData(data) {
+            localStorage.setItem('permissionsData', JSON.stringify(data));
+        }
+
+        // Check if new month and reset if needed
+        function checkAndResetMonth() {
+            const hijri = getCurrentHijriDate();
+            const data = loadData();
+            
+            if (data.lastResetMonth !== hijri.month || data.lastResetYear !== hijri.year) {
+                data.permissions = [];
+                data.lastResetMonth = hijri.month;
+                data.lastResetYear = hijri.year;
+                saveData(data);
+            }
+        }
+
+        // Update home page display
+        function updateHomeDisplay() {
+            const hijri = getCurrentHijriDate();
+            const data = loadData();
+            const used = data.permissions.length;
+            const remaining = 10 - used;
+            const percentage = (used / 10) * 100;
+            
+            // Update date info
+            document.getElementById('hijriMonth').textContent = `${hijri.monthName} ${hijri.year}`;
+            document.getElementById('monthStart').textContent = hijri.monthStart.toLocaleDateString('en-GB', {day: 'numeric', month: 'short'});
+            document.getElementById('monthEnd').textContent = hijri.monthEnd.toLocaleDateString('en-GB', {day: 'numeric', month: 'short'});
+            document.getElementById('workdays').textContent = calculateWorkdays(hijri.monthStart, hijri.monthEnd);
+            document.getElementById('todayHijri').textContent = `${hijri.day} ${hijri.monthName.substring(0, 3)}`;
+            
+            // Update counter
+            document.getElementById('counterDisplay').textContent = `${used}/10`;
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+            document.getElementById('progressText').textContent = `${Math.round(percentage)}%`;
+            document.getElementById('remainingCount').textContent = remaining;
+            
+            // Disable buttons if limit reached
+            const buttons = document.querySelectorAll('.action-buttons .btn');
+            buttons.forEach(btn => {
+                btn.disabled = used >= 10;
+            });
+        }
+
+        // Update history display
+        function updateHistoryDisplay() {
+            const data = loadData();
+            const historyList = document.getElementById('historyList');
+            
+            if (data.permissions.length === 0) {
+                historyList.innerHTML = `
+                    <div class="empty-state">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <p>No permissions used this month</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sort by date (newest first)
+            const sorted = [...data.permissions].reverse();
+            
+            historyList.innerHTML = sorted.map(perm => {
+                const typeClass = perm.type === 'late' ? 'type-late' : 'type-early';
+                const typeText = perm.type === 'late' ? 'Late Arrival' : 'Early Departure';
+                
+                return `
+                    <div class="history-item">
+                        <div class="history-date">${perm.hijriDate}</div>
+                        <div class="history-type ${typeClass}">${typeText}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Show page
+        function showPage(pageName) {
+            // Update nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageName).classList.add('active');
+            
+            // Update content based on page
+            if (pageName === 'home') {
+                updateHomeDisplay();
+            } else if (pageName === 'history') {
+                updateHistoryDisplay();
+            } else if (pageName === 'settings') {
+                updateInstallStatus();
+            }
+        }
+
+        // Use permission
+        function usePermission(type) {
+            const data = loadData();
+            if (data.permissions.length >= 10) {
+                return;
+            }
+            
+            currentPermissionType = type;
+            const modal = document.getElementById('confirmModal');
+            const typeText = type === 'late' ? 'Late Arrival' : 'Early Departure';
+            
+            document.getElementById('modalTitle').textContent = `Confirm ${typeText}`;
+            document.getElementById('modalMessage').textContent = `Are you sure you want to use a permission for ${typeText.toLowerCase()}?`;
+            
+            modal.classList.add('show');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('confirmModal').classList.remove('show');
+            currentPermissionType = null;
+        }
+
+        // Confirm permission
+        document.getElementById('confirmBtn').addEventListener('click', function() {
+            if (!currentPermissionType) return;
+            
+            const hijri = getCurrentHijriDate();
+            const data = loadData();
+            
+            data.permissions.push({
+                type: currentPermissionType,
+                date: new Date().toISOString(),
+                hijriDate: `${hijri.day} ${hijri.monthName} ${hijri.year}`,
+                hijriDay: hijri.day,
+                hijriMonth: hijri.month,
+                hijriYear: hijri.year
+            });
+            
+            saveData(data);
+            closeModal();
+            updateHomeDisplay();
+        });
+
+        // PWA Installation
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            updateInstallStatus();
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                    updateInstallStatus();
+                });
+            }
+        }
+
+        function updateInstallStatus() {
+            const installBtn = document.getElementById('installBtn');
+            const installStatus = document.getElementById('installStatus');
+            
+            if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+                installBtn.disabled = true;
+                installBtn.textContent = 'App Installed';
+                installStatus.className = 'install-status status-installed';
+                installStatus.innerHTML = '<span>✓ Running as installed app</span>';
+            } else if (deferredPrompt) {
+                installBtn.disabled = false;
+                installBtn.textContent = 'Install App';
+                installStatus.className = 'install-status status-browser';
+                installStatus.innerHTML = '<span>Running in browser - Click to install</span>';
+            } else {
+                installBtn.disabled = true;
+                installBtn.textContent = 'Install Not Available';
+                installStatus.className = 'install-status status-browser';
+                installStatus.innerHTML = '<span>Running in browser</span>';
+            }
+        }
+
+        // Initialize app
+        function init() {
+            checkAndResetMonth();
+            updateHomeDisplay();
+            
+            // Register service worker for PWA
+            if ('serviceWorker' in navigator) {
+                const sw = `
+                    self.addEventListener('install', e => {
+                        e.waitUntil(
+                            caches.open('permissions-v1').then(cache => {
+                                return cache.addAll(['/']);
+                            })
+                        );
+                    });
+                    
+                    self.addEventListener('fetch', e => {
+                        e.respondWith(
+                            caches.match(e.request).then(response => {
+                                return response || fetch(e.request);
+                            })
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([sw], {type: 'application/javascript'});
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl).then(reg => {
+                    console.log('Service Worker registered');
+                }).catch(err => {
+                    console.log('Service Worker registration failed:', err);
+                });
+            }
+        }
+
+        // Start app
+        init();
+    </script>
+
+    <!-- PWA Manifest -->
+    <script>
+        const manifestData = {
+            name: "Permissions Tracker",
+            short_name: "Permissions",
+            start_url: "/",
+            display: "standalone",
+            background_color: "#00796b",
+            theme_color: "#00796b",
+            orientation: "portrait",
+            icons: [
+                {
+                    src: "data:image/png;base64,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",
+                    sizes: "128x128",
+                    type: "image/png"
+                },
+                {
+                    src: "data:image/png;base64,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",
+                    sizes: "256x256",
+                    type: "image/png"
+                },
+                {
+                    src: "data:image/png;base64,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",
+                    sizes: "512x512",
+                    type: "image/png"
+                }
+            ]
+        };
+        
+        const manifestString = JSON.stringify(manifestData);
+        const manifestBlob = new Blob([manifestString], {type: 'application/json'});
+        const manifestURL = URL.createObjectURL(manifestBlob);
+        
+        const link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = manifestURL;
+        document.head.appendChild(link);
+    </script>
+</body>
 </html>
